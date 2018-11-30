@@ -1,0 +1,59 @@
+{
+  "name": "ts-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jgen16go/ts-react.git",
+  "author": "jgen16go <asai.work.usr@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn run js:dev & yarn run css:dev & yarn run html:dev & yarn run bsync",
+    "build": "yarn run js:prod & yarn run css:prod & yarn run html:prod",
+    "lint": "tslint src/js/**/*.ts --format stylish",
+    "fmt": "prettier --config .prettierrc --write src/js/**/*",
+    "prettier-watch": "onchange 'src/js/**/*' -- prettier --write 'src/js/**/*' --loglevel silent",
+    "bsync": "browser-sync start -s './dist' --ss ./dist --files='./dist/*.html, ./dist/css/**/*.css, ./dist/**/*.js'",
+    "html:dev": "pug ./src/html/ --hierarchy -o ./dist -P -w",
+    "html:prod": "pug ./src/html/ --hierarchy -o ./dist -P",
+    "css:dev": "cross-env NODE_ENV=development postcss --no-map -c postcss.config.js ./src/css/index.css -o ./dist/css/app.css -w",
+    "css:prod": "cross-env NODE_ENV=production postcss --no-map -c postcss.config.js ./src/css/index.css -o ./dist/css/app.css",
+    "js:dev": "yarn run prettier-watch & webpack -d -w",
+    "js:prod": "yarn run fmt && webpack -p"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "cross-env": "^5.2.0",
+    "cssnano": "^4.1.7",
+    "onchange": "^5.1.0",
+    "postcss-cli": "^6.0.1",
+    "postcss-custom-media": "^7.0.7",
+    "postcss-custom-properties": "^8.0.9",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.1.0",
+    "postcss-preset-env": "^6.4.0",
+    "prettier": "^1.15.1",
+    "pug": "^2.0.3",
+    "pug-cli": "^1.0.0-alpha6",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^5.3.1",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-loader": "^3.5.4",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.1.6",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "@types/react": "^16.7.9",
+    "@types/react-dom": "^16.0.11",
+    "axios": "^0.18.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "styled-components": "^4.1.2"
+  },
+  "browserslist": [
+    "Android >= 4.4",
+    "ios >= 10"
+  ]
+}
